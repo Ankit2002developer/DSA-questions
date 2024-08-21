@@ -9,7 +9,7 @@
 <p>
   Your task is to solve it in <code>O(log(n))</code> time complexity.
 </p>
-<code>
+
   
       Example 1:
       Input: arr = [0,1,0]
@@ -22,4 +22,27 @@
       Example 3:
       Input: arr = [0,10,5,2]
       Output: 1
-</code>
+
+# (cpp)
+    class Solution {
+    public:
+        int peakIndexInMountainArray(vector<int>& arr) {
+            int start = 0;
+            int end = arr.size()-1;
+            int mid = start + (end - start)/2;
+            
+            while(start <= end) {
+                if(arr[mid -1] < arr[mid] && arr[mid] > arr[mid+1]) {
+                    return mid;
+                }   
+                else if(arr[mid] < arr[mid+1]) {
+                    start = mid + 1;
+                }
+                else {
+                    end = mid;
+                }
+                mid = start + (end - start)/2;
+            }
+            return -1;
+        }
+    };
